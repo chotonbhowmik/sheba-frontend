@@ -1,24 +1,21 @@
 
-import data from "../../components/data/data.json"; 
+import { useQuery } from "@tanstack/react-query";
+import { fetchProductPrice } from "../../Api/Api"; 
 
-const TaskTwo = () => {
-  // here i am Adding 15% VAT and filter items where price is above 50
-  const processedItems = data
-    .map((item) => ({
-      ...item,
-      priceWithVAT: item.price * 1.15,
-    }))
-    .filter((item) => item.priceWithVAT > 50);
+const Product = () => {
+  const {
+    data: availableData = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["availableData"],
+    queryFn: fetchProductPrice,
+  });
 
-  // Calculate the total price
-  const totalPrice = processedItems.reduce(
-    (acc, item) => acc + item.priceWithVAT,
-    0
-  );
-  const priceWithoutTax = processedItems.reduce(
-    (acc, item) => acc + item.price,
-    0
-  );
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching data</div>;
+
+  const { processedItems, totalPrice, priceWithoutTax } = availableData;
 
   return (
     <div className="container mx-auto p-4 max-w-5xl">
@@ -31,16 +28,14 @@ const TaskTwo = () => {
           <div>Original Price</div>
           <div>Price with VAT</div>
         </div>
-        {processedItems.map((item, index) => (
+        {processedItems.map((item) => (
           <div
-            key={index}
+            key={item._id}
             className="grid grid-cols-3 gap-4 py-2 border-b border-dotted border-gray-300"
           >
             <div>{item.name}</div>
             <div>${item.price.toFixed(2)}</div>
-            <div className="">
-              ${item.priceWithVAT.toFixed(2)}
-            </div>
+            <div>${item.priceWithVAT.toFixed(2)}</div>
           </div>
         ))}
         <div className="grid grid-cols-3 gap-4 pt-4">
@@ -57,4 +52,4 @@ const TaskTwo = () => {
   );
 };
 
-export default TaskTwo;
+export default Product;

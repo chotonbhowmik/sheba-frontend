@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
-const MOVIE_API_BASE_URL = import.meta.env.VITE_MOVIE_API_BASE_URL; // OMDb API base URL
+const MOVIE_API_BASE_URL = import.meta.env.VITE_MOVIE_API_BASE_URL; 
 
 const client = axios.create({
   baseURL: BASE_URL,
@@ -31,5 +31,10 @@ export const fetchMovies = async (searchTerm) => {
   const response = await movieClient.get(
     `/?apikey=${API_KEY}&type=movie&s=${searchTerm}`
   );
+  return response.data;
+};
+
+export const fetchProductPrice = async () => {
+  const response = await client.get(`/products`);
   return response.data;
 };

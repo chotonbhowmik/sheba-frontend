@@ -74,9 +74,9 @@ const Navbar = () => {
                   <a>Movies</a>
                 </li>
               </NavLink>
-              <NavLink to="/task2">
+              <NavLink to="/product">
                 <li>
-                  <a>Task Two</a>
+                  <a>Product</a>
                 </li>
               </NavLink>
             </ul>

@@ -7,7 +7,7 @@ import Root from "./components/Root/Root.jsx";
 import Home from "../src/pages/Home/Home.jsx"
 import AppoinmentList from "./pages/Home/AppoinmentList/AppoinmentList.jsx";
 import Movies from "./pages/Movies/Movies.jsx";
-import TaskTwo from "./pages/TaskTwo/TaskTwo.jsx";
+import Product from "./pages/Product/Product.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
         element: <Movies></Movies>,
       },
       {
-        path: "/task2",
-        element: <TaskTwo></TaskTwo>,
+        path: "/product",
+        element: <Product></Product>,
       },
     ],
   },
